@@ -230,7 +230,32 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
+  'ThePrimeagen/vim-be-good',
+  'nvim_lua/plenary.nvim',
+  {
+    'ThePrimeagen/harpoon',
+    config = function()
+      local mark = require 'harpoon.mark'
+      vim.keymap.set('n', '<leader>ha', mark.add_file, { desc = '[H]arpoon [A]dd' })
+      local ui = require 'harpoon.ui'
+      vim.keymap.set('n', '<leader>hh', ui.toggle_quick_menu, { desc = '[H]arpoon [H]Fast' })
+      vim.keymap.set('n', '<leader>hn', ui.nav_next, { desc = '[H]arpoon [N]ext' })
+      vim.keymap.set('n', '<leader>hp', ui.nav_prev, { desc = '[H]arpoon [P]revious' })
+      local term = require 'harpoon.term'
+      vim.keymap.set('n', '<leader>ht1', function()
+        term.gotoTerminal(1)
+      end, { desc = '[H]arpoon [T]erminal 1' })
+      vim.keymap.set('n', '<leader>ht2', function()
+        term.gotoTerminal(2)
+      end, { desc = '[H]arpoon [T]erminal 2' })
+      vim.keymap.set('n', '<leader>ht3', function()
+        term.gotoTerminal(3)
+      end, { desc = '[H]arpoon [T]erminal 3' })
+      vim.keymap.set('n', '<leader>ht4', function()
+        term.gotoTerminal(4)
+      end, { desc = '[H]arpoon [T]erminal 4' })
+    end,
+  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -400,6 +425,7 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      vim.keymap.set('n', '<C-e>', builtin.git_files, { desc = 'Telescope git files' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -937,7 +963,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
