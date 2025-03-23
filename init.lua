@@ -233,6 +233,11 @@ require('lazy').setup({
   'ThePrimeagen/vim-be-good',
   'nvim_lua/plenary.nvim',
   {
+    'tribela/transparent.nvim',
+    event = 'VimEnter',
+    config = true,
+  },
+  {
     'ThePrimeagen/harpoon',
     config = function()
       local mark = require 'harpoon.mark'
